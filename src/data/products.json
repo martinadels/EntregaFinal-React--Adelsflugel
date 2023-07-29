@@ -1,59 +1,45 @@
 [
     {
       "id": 1,
-      "brand": "Brand 1",
-      "style": "Style 1",
-      "category": "Category 1",
-      "img": "https://i.pinimg.com/236x/6e/b1/00/6eb100e23fb56bd2b7a4e12ec2f676ba.jpg"
+      "brand": "Nike",
+      "style": "Deportivo",
+      "category": "Conjunto",
+      "img": "http://lavalente.com/2017/wp-content/uploads/2017/11/allegra-thumb.jpg"
     },
     {
       "id": 2,
-      "brand": "Brand 2",
-      "style": "Style 2",
-      "category": "Category 2",
-      "img": "https://i.pinimg.com/236x/1d/40/9b/1d409ba91b91a59515ac728ed83ab03b.jpg"
+      "brand": "Nike",
+      "style": "Salida",
+      "category": "Remera",
+      "img": "http://lavalente.com/2017/wp-content/uploads/2017/11/WEB-LA-VALENTE-DETALLE6.jpg"
     },
     {
       "id": 3,
-      "brand": "Brand 3",
-      "style": "Style 3",
-      "category": "Category 1",
-      "img": "https://i.pinimg.com/236x/69/61/8a/69618a5dceb637e11e4ea4ad1e192099.jpg"
+      "brand": "ADIDAS",
+      "style": "Deportivo",
+      "category": "Conjunto de entrenamiento",
+      "img": "http://lavalente.com/2017/wp-content/uploads/2017/11/gemma-thumb.jpg"
     },
     {
       "id": 4,
       "brand": "Brand 4",
       "style": "Style 1",
       "category": "Category 3",
-      "img": "https://i.pinimg.com/236x/09/5a/5d/095a5df9cdf232732909ac22f776334d.jpg"
+      "img": "http://lavalente.com/2017/wp-content/uploads/2017/11/athina-thumb.jpg"
     },
     {
       "id": 5,
       "brand": "Brand 5",
       "style": "Style 2",
       "category": "Category 2",
-      "img": "https://i.pinimg.com/236x/8b/7f/a5/8b7fa5271dae4d9142eb139486a693e0.jpg"
+      "img": "http://lavalente.com/2017/wp-content/uploads/2017/11/olivia-thumb.jpg"
     },
     {
       "id": 6,
       "brand": "Brand 6",
       "style": "Style 3",
       "category": "Category 1",
-      "img": "https://i.pinimg.com/236x/a3/c5/1a/a3c51a0ca2c431a52f6246278d869bfa.jpg"
-    },
-    {
-      "id": 7,
-      "brand": "Brand 7",
-      "style": "Style 1",
-      "category": "Category 3",
-      "img": "https://i.pinimg.com/474x/e4/be/6d/e4be6d2d8efe91d24eb7e3422d2f1f7f.jpg"
-    },
-    {
-      "id": 8,
-      "brand": "Brand 8",
-      "style": "Style 2",
-      "category": "Category 2",
-      "img": "https://i.pinimg.com/236x/ed/42/d0/ed42d0956897de22700edbd35e0bdc56.jpg"
+      "img": "http://lavalente.com/2017/wp-content/uploads/2017/11/WEB-LA-VALENTE-DETALLE2.jpg"
     }
   ]
   
