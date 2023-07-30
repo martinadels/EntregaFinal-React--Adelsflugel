@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './firebase/firebaseConfig';
+import { firebaseConfig } from './services/firebase/firebaseConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 initializeApp(firebaseConfig);

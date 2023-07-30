@@ -46,3 +46,32 @@
     background-color: #0056b3;
   }
   
+  /* Estilos para el contenedor principal */
+.item-list-container {
+  padding: 20px;
+}
+
+/* Estilos para cada tarjeta de producto */
+.item-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.item-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.item-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}

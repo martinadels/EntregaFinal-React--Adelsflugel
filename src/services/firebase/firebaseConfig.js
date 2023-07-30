@@ -19,3 +19,4 @@ const analytics = getAnalytics(app);
 const firestore = getFirestore(app);
 
 export { app, analytics, firestore,firebaseConfig };
+export const db = getFirestore(app)

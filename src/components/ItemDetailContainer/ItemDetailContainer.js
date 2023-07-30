@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { firestore } from "../../firebase/firebaseConfig";
+import { firestore } from "../../services/firebase/firebaseConfig";
 import { useCartContext } from '../../context/CartContext';
 import './ItemDetailContainer.css';
+import ItemCount from '../ItemCount/ItemCount'; 
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
@@ -36,10 +37,9 @@ const ItemDetailContainer = () => {
     getProductById();
   }, [id]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (quantity) => {
     if (product) {
-      
-      addItemToCart(product, 1);
+      addItemToCart(product, quantity);
     }
   };
 
@@ -63,7 +63,7 @@ const ItemDetailContainer = () => {
             <p>{product.Descripcion}</p>
             <p>Disponible: {product.Disponible ? 'Sí' : 'No'}</p>
             <p>Precio: {product.Precio}</p>
-            <button onClick={handleAddToCart}>Agregar al carrito</button>
+            <ItemCount product={product} onAdd={handleAddToCart} /> 
           </div>
         </div>
       ) : (
