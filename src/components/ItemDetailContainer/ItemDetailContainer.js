@@ -38,7 +38,7 @@ const ItemDetailContainer = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      // Puedes ajustar el monto de la cantidad en el carro si tienes un campo para el stock en Firebase
+      
       addItemToCart(product, 1);
     }
   };

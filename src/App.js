@@ -8,7 +8,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart';
 import { CartProvider } from "./context/CartContext";
 import Checkout from "./components/Checkout/Checkout";
-import { getFirestore,getDoc,Doc  } from "firebase/firestore";
+//import { getFirestore,getDoc,Doc  } from "firebase/firestore";
 
 export default function App() {
   return (

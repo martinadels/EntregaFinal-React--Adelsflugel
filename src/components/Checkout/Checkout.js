@@ -11,7 +11,7 @@ const Checkout = () => {
     repeatEmail: '',
   });
 
-  const { cartItems, getTotalPrice } = useCartContext(); // Obtenemos los productos del carrito y el precio total
+  const { cartItems, getTotalPrice } = useCartContext(); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,7 +73,7 @@ const Checkout = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="repeatEmail">Repeat Email:</label>
+          <label htmlFor="repeatEmail">Repetir Email:</label>
           <input
             type="email"
             id="repeatEmail"
@@ -90,7 +90,7 @@ const Checkout = () => {
           {cartItems.map((item) => (
             <div key={item.id}>
               <p>{item.brand}</p>
-              <p>Precio unitario: {item.price}</p>
+              <p>Precio: {item.price}</p>
               <p>Cantidad: {item.quantity}</p>
               <p>Subtotal: {item.price * item.quantity}</p>
             </div>
