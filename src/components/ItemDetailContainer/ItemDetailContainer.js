@@ -1,18 +1,36 @@
-import React, { useState, useEffect,useContext } from "react";
-import { useParams } from "react-router-dom";
-import productsData from "../../data/products.json";
-import { useCartContext } from "../../context/CartContext"; // Asegúrate de importar el contexto CartContext
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { firestore } from "../../firebase/firebaseConfig";
+import { useCartContext } from '../../context/CartContext';
+import './ItemDetailContainer.css';
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addItemToCart } = useContext(useCartContext); // Obtener la función addItemToCart del contexto
+  const { addItemToCart } = useCartContext();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    // Función para buscar el producto con el ID proporcionado en el JSON
     const getProductById = () => {
-      const productFound = productsData.find((item) => item.id === parseInt(id));
-      setProduct(productFound);
+      const productRef = firestore.collection('products').doc(id);
+      productRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const productData = doc.data();
+            setProduct(productData);
+          } else {
+            setError('Producto no encontrado.');
+          }
+        })
+        .catch((error) => {
+          setError('Error al obtener el producto.');
+          console.log('Error al obtener el producto:', error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     };
 
     getProductById();
@@ -20,20 +38,33 @@ const ItemDetailContainer = () => {
 
   const handleAddToCart = () => {
     if (product) {
-      // Agregar el producto al carrito usando la función addItemToCart del contexto
-      addItemToCart(product, 1); // En este caso, siempre agregamos 1 producto a la vez
+      // Puedes ajustar el monto de la cantidad en el carro si tienes un campo para el stock en Firebase
+      addItemToCart(product, 1);
     }
   };
+
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div>
       {product ? (
-        <div className="item-detail">
-          <img src={product.img} alt={product.brand} />
-          <h2>{product.brand}</h2>
-          <p>{product.style}</p>
-          <p>{product.category}</p>
-          <button onClick={handleAddToCart}>Agregar al carrito</button>
+        <div className="item-detail-container">
+          <div className="item-detail-image">
+            <img src={product.Imagen} alt={product.Marca} />
+          </div>
+          <div className="item-detail-details">
+            <h2>{product.Marca}</h2>
+            <p>{product.Descripcion}</p>
+            <p>Disponible: {product.Disponible ? 'Sí' : 'No'}</p>
+            <p>Precio: {product.Precio}</p>
+            <button onClick={handleAddToCart}>Agregar al carrito</button>
+          </div>
         </div>
       ) : (
         <p>Producto no encontrado.</p>

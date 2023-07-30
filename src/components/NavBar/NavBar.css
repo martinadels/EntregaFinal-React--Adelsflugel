@@ -1,42 +1,108 @@
 .navbar {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-  
-  .navbar-brand {
-    font-size: 24px;
-  }
-  
-  .navbar-menu {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-menu-list {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-menu-list li {
-    margin-right: 20px;
-  }
-  
-  .navbar-menu-list li:last-child {
-    margin-right: 0;
-  }
-  
-  .navbar-menu-list a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .navbar-menu-list a:hover {
-    text-decoration: underline;
-  }
-  
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cart-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.cart-icon {
+  max-width: 30px;
+}
+
+/* Nueva regla CSS para centrar los elementos */
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links > * {
+  margin: 0 10px;
+}
+
+.nav-links > :last-child {
+  margin-right: 0;
+}
+
+.cart-quantity {
+  background-color: red;
+  color: #fff;
+ 
+}
+
+
+
+.cart-widget {
+  position: relative;
+}
+
+.cart-quantity {
+  position: relative;
+  top: -10px; 
+  right: -10px; 
+  background-color: red;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+.checkout-button {
+  background-color: #f39c12;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.cart-icon {
+  width: 30px;
+  height: auto;
+}
+
+

@@ -1,0 +1,33 @@
+.item-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .item-detail-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .item-detail-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item-detail-details h2 {
+    margin-bottom: 10px;
+  }
+  
+  .item-detail-details p {
+    margin: 5px 0;
+  }
+  
+  .item-detail-details button {
+    margin-top: 20px;
+  }
+
+  
+  

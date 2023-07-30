@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Checkout.css';
+import { useCartContext } from '../../context/CartContext';
 
 const Checkout = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const Checkout = () => {
     repeatEmail: '',
   });
 
+  const { cartItems, getTotalPrice } = useCartContext(); // Obtenemos los productos del carrito y el precio total
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -17,7 +20,7 @@ const Checkout = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     console.log(formData);
   };
 
@@ -80,6 +83,21 @@ const Checkout = () => {
             required
           />
         </div>
+
+        {/* Lista de productos del carrito */}
+        <div>
+          <h3>Productos en el carrito:</h3>
+          {cartItems.map((item) => (
+            <div key={item.id}>
+              <p>{item.brand}</p>
+              <p>Precio unitario: {item.price}</p>
+              <p>Cantidad: {item.quantity}</p>
+              <p>Subtotal: {item.price * item.quantity}</p>
+            </div>
+          ))}
+          <p>Total de la orden: {getTotalPrice()}</p>
+        </div>
+
         <button type="submit">Submit Order</button>
       </form>
     </div>

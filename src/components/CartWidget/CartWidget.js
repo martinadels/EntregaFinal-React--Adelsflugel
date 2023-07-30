@@ -1,18 +1,13 @@
+import React from "react";
 import { useCartContext } from "../../context/CartContext";
 import "./CartWidget.css";
-import cart from "../../assets/cart.png";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
 
 const CartWidget = () => {
-  const { totalQuantity } = useContext(useCartContext);
-
+  // No necesitamos mostrar el ícono del carrito aquí, ya que lo estamos mostrando en el NavBar
+  // Eliminamos el código relacionado al ícono del carrito y la cantidad
   return (
     <div className="cart-widget">
-      <Link to="/cart" className="cart-link" style={{ display: totalQuantity > 0 ? "block" : "none" }}>
-        <img className="cart-icon" src={cart} alt="cart-widget" />
-        <span className="cart-quantity">{totalQuantity}</span>
-      </Link>
+      {/* Aquí puede ir otro contenido del CartWidget si es necesario */}
     </div>
   );
 };

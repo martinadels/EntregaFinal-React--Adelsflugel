@@ -1,21 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './NavBar.css';
+import CartWidget from '../CartWidget/CartWidget';
+import { useCartContext } from '../../context/CartContext';
 
 const NavBar = () => {
-  // Aquí puedes definir las categorías disponibles (puedes obtenerlas desde Firebase en el futuro)
-  const categories = ['cafeteras', 'tazas', 'accesorios'];
+  const { cartItems } = useCartContext();
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">Cafeteras Adel</div>
-      <div className="navbar-menu">
-        <ul className="navbar-menu-list">
-          {categories.map((category) => (
-            <li key={category}>
-              <a href={`/categories/${category}`}>{category}</a>
-            </li>
-          ))}
-        </ul>
+      <div className="navbar-container">
+        <div className="navbar-logo">
+          <Link to="/">Logo</Link>
+        </div>
+        <div className="navbar-links">
+          <Link to="/">Productos</Link>
+        </div>
+        <div className="navbar-cart">
+          <Link to="/cart">
+            <CartWidget itemCount={cartItems.length} />
+          </Link>
+        </div>
       </div>
     </nav>
   );
