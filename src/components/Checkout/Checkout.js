@@ -1,28 +1,49 @@
 import React, { useState } from 'react';
 import './Checkout.css';
 import { useCartContext } from '../../context/CartContext';
+import {db} from "../../services/firebase/firebaseConfig"
+import { getFirestore,collection,addDoc,getDoc,doc,deleteDoc,getDocs } from 'firebase/firestore';
 
-const Checkout = () => {
-  const [formData, setFormData] = useState({
+const Checkout = async () => {
+  const valorInicial = {
     firstName: '',
     lastName: '',
     phone: '',
     email: '',
     repeatEmail: '',
-  });
+  };
 
   const { cartItems, getTotalPrice } = useCartContext(); 
+  const orderRef = collection(db,'orders')
+  // const orderAdded = await addDoc(orderRef, objOrder)
+  // const db = getFirestore (appFirebase)
 
+  const [user,setUser] = useState(valorInicial)
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    // setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setUser ({...user, [name]:value})
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(formData);
+    try {
+      await addDoc(collection(db,"orders"),{
+        ...user
+      })
+    } catch (error) {
+      console.log (error)
+    }
+    setUser ({...valorInicial})
+  }
 
-    console.log(formData);
-  };
+
+
+    
+  ;
+  
 
   return (
     <div className="checkout">
@@ -34,7 +55,7 @@ const Checkout = () => {
             type="text"
             id="firstName"
             name="firstName"
-            value={formData.firstName}
+            value={valorInicial.firstName}
             onChange={handleChange}
             required
           />
@@ -45,7 +66,7 @@ const Checkout = () => {
             type="text"
             id="lastName"
             name="lastName"
-            value={formData.lastName}
+            value={valorInicial.lastName}
             onChange={handleChange}
             required
           />
@@ -56,7 +77,7 @@ const Checkout = () => {
             type="tel"
             id="phone"
             name="phone"
-            value={formData.phone}
+            value={valorInicial.phone}
             onChange={handleChange}
             required
           />
@@ -67,7 +88,7 @@ const Checkout = () => {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
+            value={valorInicial.email}
             onChange={handleChange}
             required
           />
@@ -78,7 +99,7 @@ const Checkout = () => {
             type="email"
             id="repeatEmail"
             name="repeatEmail"
-            value={formData.repeatEmail}
+            value={valorInicial.repeatEmail}
             onChange={handleChange}
             required
           />
@@ -101,7 +122,7 @@ const Checkout = () => {
         <button type="submit">Submit Order</button>
       </form>
     </div>
-  );
-};
+  );    
+}
 
 export default Checkout;
