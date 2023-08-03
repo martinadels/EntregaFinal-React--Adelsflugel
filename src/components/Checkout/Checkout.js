@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import './Checkout.css';
 import { useCartContext } from '../../context/CartContext';
 import {db} from "../../services/firebase/firebaseConfig"
-import { getFirestore,collection,addDoc,getDoc,doc,deleteDoc,getDocs } from 'firebase/firestore';
+import { collection,addDoc,getDoc,doc,deleteDoc,getDocs } from 'firebase/firestore';
 
 const Checkout = async () => {
-  const valorInicial = {
+  const [user,setUser] = useState({
     firstName: '',
     lastName: '',
     phone: '',
     email: '',
     repeatEmail: '',
-  };
+  });
 
   const { cartItems, getTotalPrice } = useCartContext(); 
-  const orderRef = collection(db,'orders')
+  // const orderRef = collection(db,'orders')
   // const orderAdded = await addDoc(orderRef, objOrder)
   // const db = getFirestore (appFirebase)
 
-  const [user,setUser] = useState(valorInicial)
+  // const [user,setUser] = useState(valorInicial)
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +36,7 @@ const Checkout = async () => {
     } catch (error) {
       console.log (error)
     }
-    setUser ({...valorInicial})
+    // setUser ({...valorInicial})
   }
 
 
@@ -55,7 +55,7 @@ const Checkout = async () => {
             type="text"
             id="firstName"
             name="firstName"
-            value={valorInicial.firstName}
+            value={user.firstName}
             onChange={handleChange}
             required
           />
@@ -66,7 +66,7 @@ const Checkout = async () => {
             type="text"
             id="lastName"
             name="lastName"
-            value={valorInicial.lastName}
+            value={user.lastName}
             onChange={handleChange}
             required
           />
@@ -77,7 +77,7 @@ const Checkout = async () => {
             type="tel"
             id="phone"
             name="phone"
-            value={valorInicial.phone}
+            value={user.phone}
             onChange={handleChange}
             required
           />
@@ -88,7 +88,7 @@ const Checkout = async () => {
             type="email"
             id="email"
             name="email"
-            value={valorInicial.email}
+            value={user.email}
             onChange={handleChange}
             required
           />
@@ -99,7 +99,7 @@ const Checkout = async () => {
             type="email"
             id="repeatEmail"
             name="repeatEmail"
-            value={valorInicial.repeatEmail}
+            value={user.repeatEmail}
             onChange={handleChange}
             required
           />
