@@ -1,108 +1,32 @@
+/* Dentro de NavBar.css */
+
+/* Estilos para el navbar */
 .navbar {
   background-color: #f5f5f5;
   padding: 10px;
-}
-
-.navbar-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
+/* Estilos para el logo */
 .logo {
+  max-height: 40px; /* Ajusta el tamaño del logo según tus necesidades */
+  border-radius: 8px; /* Agrega bordes redondeados al logo */
+}
+
+/* Estilos para el contenedor del logo en el navbar */
+.navbar-brand {
+  flex: 1; /* El logo ocupará todo el espacio disponible en el navbar */
+}
+
+/* Estilos para el contenedor de los elementos del navbar */
+.navbar-items {
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
-.logo img {
-  max-height: 50px;
-  margin-right: 10px;
-}
-
-.logo h1 {
-  font-size: 24px;
-  margin: 0;
-}
-
-.nav-links {
+.navbar-cart {
   display: flex;
-  gap: 20px;
-  align-items: center;
+  justify-content: flex-end;
 }
-
-.nav-link {
-  color: #333;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.cart-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #333;
-}
-
-.cart-icon {
-  max-width: 30px;
-}
-
-/* Nueva regla CSS para centrar los elementos */
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links > * {
-  margin: 0 10px;
-}
-
-.nav-links > :last-child {
-  margin-right: 0;
-}
-
-.cart-quantity {
-  background-color: red;
-  color: #fff;
- 
-}
-
-
-
-.cart-widget {
-  position: relative;
-}
-
-.cart-quantity {
-  position: relative;
-  top: -10px; 
-  right: -10px; 
-  background-color: red;
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 50%;
-}
-
-.checkout-button {
-  background-color: #f39c12;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-  margin-right: 10px;
-}
-
-.cart-icon {
-  width: 30px;
-  height: auto;
-}
-
-

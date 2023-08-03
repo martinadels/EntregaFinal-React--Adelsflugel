@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { firestore } from '../../services/firebase/firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../services/firebase/firebaseConfig'; 
 import './ItemListContainer.css';
-
-
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const getProducts = () => {
-      const productsRef = firestore.collection('products');
-      productsRef.get().then((snapshot) => {
+    const getProducts = async () => {
+      try {
+        const productsRef = collection(db, 'products'); 
+        const snapshot = await getDocs(productsRef);
         const productsData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         setProducts(productsData);
-      });
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+      }
     };
 
     getProducts();
@@ -30,12 +32,12 @@ const ItemListContainer = ({ greeting }) => {
           {products.map((product) => (
             <div key={product.id} className="col-md-4">
               <div className="item-card">
-                <img src={product.Imagen} alt={product.Marca} />
-                <h3>{product.Marca}</h3>
-                <p>{product.Descripcion}</p>
-                <p>Disponible: {product.Disponible ? 'Sí' : 'No'}</p>
-                <p>Precio: {product.Precio}</p>
-                <Link to={`/item/${product.id}`}>
+                <img src={product.img} alt={product.brand} />
+                <h3>{product.brand}</h3>
+                <p>{product.style}</p>
+                <p>Disponible: {product.stock ? 'Sí' : 'No'}</p>
+                <p>Precio: {product.price}</p>
+                <Link to={`/item/${product.id}`}> {/* Utiliza template literal para incluir el id del producto en la URL */}
                   <button>Ver detalles</button>
                 </Link>
               </div>

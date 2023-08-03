@@ -1,29 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CartWidget from '../CartWidget/CartWidget'; // Importa el componente CartWidget aquí
 import './NavBar.css';
-import CartWidget from '../CartWidget/CartWidget';
-import { useCartContext } from '../../context/CartContext';
+import logo from "../../assets/coffeemaker.png"
 
-const NavBar = () => {
-  const { cartItems } = useCartContext();
-
+const Navbar = () => {
+  // Resto del código del componente Navbar
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-logo">
-          <Link to="/">Logo</Link>
-        </div>
-        <div className="navbar-links">
-          <Link to="/">Productos</Link>
-        </div>
-        <div className="navbar-cart">
-          <Link to="/cart">
-            <CartWidget itemCount={cartItems.length} />
-          </Link>
-        </div>
+      <div className="navbar-brand">
+        <Link to="/">
+          <img src={logo} alt="Logo" className="logo" />
+        </Link>
+      </div>
+      <div className="navbar-items"></div>
+      <div className="navbar-cart">
+        <Link to="/cart">
+          <h3>Ir al carrito</h3>
+        </Link>
+        <CartWidget />
       </div>
     </nav>
   );
 };
 
-export default NavBar;
+export default Navbar;

@@ -1,45 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { firestore } from "../../services/firebase/firebaseConfig";
+import { useParams, Link } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../services/firebase/firebaseConfig';
 import { useCartContext } from '../../context/CartContext';
 import './ItemDetailContainer.css';
-import ItemCount from '../ItemCount/ItemCount'; 
+import ItemCount from '../ItemCount/ItemCount';
+
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addItemToCart } = useCartContext();
+  const { addItemToCart } = useCartContext(); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [quantity,setQuantity] = useState(1);
+  const [stockAvailable, setStockAvailable] = useState(0);
 
   useEffect(() => {
-    const getProductById = () => {
-      const productRef = firestore.collection('products').doc(id);
-      productRef
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            const productData = doc.data();
-            setProduct(productData);
-          } else {
-            setError('Producto no encontrado.');
-          }
-        })
-        .catch((error) => {
-          setError('Error al obtener el producto.');
-          console.log('Error al obtener el producto:', error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    const getProductById = async () => {
+      try {
+        const productRef = doc(db, 'products', id);
+        const docSnapshot = await getDoc(productRef);
+        if (docSnapshot.exists()) {
+          const productData = docSnapshot.data();
+          setProduct(productData);
+          setStockAvailable(productData.stock);
+        } else {
+          setError('Producto no encontrado.');
+        }
+      } catch (error) {
+        setError('Error al obtener el producto.');
+        console.log('Error al obtener el producto:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     getProductById();
   }, [id]);
 
-  const handleAddToCart = (quantity) => {
+  const handleAddToCart = () => {
     if (product) {
-      addItemToCart(product, quantity);
+      if (quantity > stockAvailable) {
+        alert('No hay suficiente stock disponible. Por favor, selecciona una cantidad menor.');
+      } else {
+        for (let i = 0; i < quantity; i++) {
+          addItemToCart(product, 1); 
+        }
+      }
     }
   };
 
@@ -56,14 +64,18 @@ const ItemDetailContainer = () => {
       {product ? (
         <div className="item-detail-container">
           <div className="item-detail-image">
-            <img src={product.Imagen} alt={product.Marca} />
+            <img src={product.img} alt={product.brand} />
           </div>
           <div className="item-detail-details">
-            <h2>{product.Marca}</h2>
-            <p>{product.Descripcion}</p>
-            <p>Disponible: {product.Disponible ? 'Sí' : 'No'}</p>
-            <p>Precio: {product.Precio}</p>
-            <ItemCount product={product} onAdd={handleAddToCart} /> 
+            <h2>{product.brand}</h2>
+            <p>{product.style}</p>
+            <p>Disponible: {product.stock ? 'Sí' : 'No'}</p>
+            <p>Precio: {product.price}</p>
+            <ItemCount product={product} onAdd={setQuantity} />
+            <p>Cantidad seleccionada: {quantity}</p> 
+            <Link to="/cart">
+              <button>Finalizar compra</button>
+            </Link>
           </div>
         </div>
       ) : (

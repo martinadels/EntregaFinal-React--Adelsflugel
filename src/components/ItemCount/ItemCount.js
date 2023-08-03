@@ -1,29 +1,20 @@
 import React, { useState } from 'react';
+import { useCartContext } from '../../context/CartContext';
 
-const ItemCount = ({ stock, initial, onAdd }) => {
-  const [quantity, setQuantity] = useState(initial);
-
-  const handleIncrement = () => {
-    if (quantity < stock) {
-      setQuantity(quantity + 1);
-    }
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+const ItemCount = ({ product, onAdd }) => {
+  const [quantity, setQuantity] = useState(1);
+  const { addItemToCart } = useCartContext();
 
   const handleAddToCart = () => {
-    onAdd(quantity);
+    if (quantity > product.stock) {
+      alert('No hay suficiente stock disponible. Por favor, selecciona una cantidad menor.');
+    } else {
+      addItemToCart(product,quantity);
+    }
   };
 
   return (
-    <div className="item-count">
-      <button onClick={handleDecrement}>-</button>
-      <span>{quantity}</span>
-      <button onClick={handleIncrement}>+</button>
+    <div>
       <button onClick={handleAddToCart}>Agregar al carrito</button>
     </div>
   );
