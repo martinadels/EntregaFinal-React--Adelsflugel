@@ -4,7 +4,7 @@ import { useCartContext } from '../../context/CartContext';
 import {db} from "../../services/firebase/firebaseConfig"
 import { collection,addDoc,getDoc,doc,deleteDoc,getDocs } from 'firebase/firestore';
 
-const Checkout = async () => {
+const Checkout = () => {
   const [user,setUser] = useState({
     firstName: '',
     lastName: '',
