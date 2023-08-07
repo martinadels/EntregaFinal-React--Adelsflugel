@@ -14,15 +14,12 @@ const Checkout = () => {
   });
 
   const { cartItems, getTotalPrice } = useCartContext(); 
-  // const orderRef = collection(db,'orders')
-  // const orderAdded = await addDoc(orderRef, objOrder)
-  // const db = getFirestore (appFirebase)
 
-  // const [user,setUser] = useState(valorInicial)
-  
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+
     setUser ({...user, [name]:value})
   };
 
@@ -36,7 +33,7 @@ const Checkout = () => {
     } catch (error) {
       console.log (error)
     }
-    // setUser ({...valorInicial})
+   
   }
 
 
