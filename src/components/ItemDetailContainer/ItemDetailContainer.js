@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../services/firebase/firebaseConfig';
-import { useCartContext } from '../../context/CartContext';
 import './ItemDetailContainer.css';
-import ItemCount from '../ItemCount/ItemCount';
+import ItemDetail from '../ItemDetail/ItemDetail'
 
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addItemToCart } = useCartContext(); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [quantity,setQuantity] = useState(1);
   const [stockAvailable, setStockAvailable] = useState(0);
 
   useEffect(() => {
@@ -39,17 +36,7 @@ const ItemDetailContainer = () => {
     getProductById();
   }, [id]);
 
-  const handleAddToCart = () => {
-    if (product) {
-      if (quantity > stockAvailable) {
-        alert('No hay suficiente stock disponible. Por favor, selecciona una cantidad menor.');
-      } else {
-        for (let i = 0; i < quantity; i++) {
-          addItemToCart(product, 1); 
-        }
-      }
-    }
-  };
+ 
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -62,22 +49,7 @@ const ItemDetailContainer = () => {
   return (
     <div>
       {product ? (
-        <div className="item-detail-container">
-          <div className="item-detail-image">
-            <img src={product.img} alt={product.brand} />
-          </div>
-          <div className="item-detail-details">
-            <h2>{product.brand}</h2>
-            <p>{product.style}</p>
-            <p>Disponible: {product.stock ? 'Sí' : 'No'}</p>
-            <p>Precio: {product.price}</p>
-            <ItemCount product={product} onAdd={setQuantity} />
-            <p>Cantidad seleccionada: {quantity}</p> 
-            <Link to="/cart">
-              <button>Finalizar compra</button>
-            </Link>
-          </div>
-        </div>
+        <ItemDetail product={product} stockAvailable={stockAvailable}/>
       ) : (
         <p>Producto no encontrado.</p>
       )}
@@ -85,4 +57,4 @@ const ItemDetailContainer = () => {
   );
 };
 
-export default ItemDetailContainer;
+export default ItemDetailContainer
