@@ -17,7 +17,6 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-items">
-        {/* Dropdown menu */}
         <div className="dropdown">
           <button className="dropbtn">Categorías</button>
           <div className="dropdown-content">

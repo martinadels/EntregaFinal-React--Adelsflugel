@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Checkout.css';
 import { useCartContext } from '../../context/CartContext';
-import {db} from "../../services/firebase/firebaseConfig"
-import { collection,addDoc} from 'firebase/firestore';
+import { db } from "../../services/firebase/firebaseConfig"
+import { collection, addDoc } from 'firebase/firestore';
 
 const Checkout = () => {
-  const [user,setUser] = useState({
+  const [user, setUser] = useState({
     firstName: '',
     lastName: '',
     phone: '',
@@ -15,13 +15,13 @@ const Checkout = () => {
   });
 
   const [orderId, setOrderId] = useState(null);
-  const { cartItems, getTotalPrice,clearCart } = useCartContext(); 
+  const { cartItems, getTotalPrice, clearCart } = useCartContext();
 
 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser ({...user, [name]:value})
+    setUser({ ...user, [name]: value })
   };
 
   const handleSubmit = async (e) => {
@@ -33,15 +33,15 @@ const Checkout = () => {
         total: getTotalPrice(),
         date: new Date().toISOString(),
       });
-  
-      setOrderId(orderRef.id); 
+
+      setOrderId(orderRef.id);
       clearCart();
     } catch (error) {
       console.log(error);
 
     }
   };
-  
+
 
   return (
     <div className="checkout">
@@ -51,7 +51,7 @@ const Checkout = () => {
           <p>Order ID: {orderId}</p>
           <Link to="/" onClick={clearCart}>
             Volver a los productos
-            </Link>
+          </Link>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -98,8 +98,8 @@ const Checkout = () => {
               onChange={handleChange}
               required
             />
-          </div>          
-            <div className="form-group">
+          </div>
+          <div className="form-group">
             <label htmlFor="repeatEmail">Repetir email:</label>
             <input
               type="email"
@@ -113,11 +113,12 @@ const Checkout = () => {
           <button type="submit">Submit Order</button>
         </form>
       )}
-  
+
       <div>
         <h3>Productos en el carrito:</h3>
         {cartItems.map((item) => (
-          <div key={item.id}>
+          <div className="cart-item" key={item.id}>
+            <img src={item.img} alt={item.brand} className="cart-item-image" />
             <p>{item.brand}</p>
             <p>Precio: {item.price}</p>
             <p>Cantidad: {item.quantity}</p>
