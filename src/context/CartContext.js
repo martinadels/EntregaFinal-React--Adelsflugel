@@ -8,15 +8,17 @@ export const useCartContext = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems,setCartItems]=useState([]);
-
+  const [setCart]=useState([]);
+  
   const addItemToCart = (item, quantity) => {
     setCartItems((prevItems) => [...prevItems, { ...item, quantity }]);
   };
-
-
   
   const removeItem = (itemId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
+    const deleteItem = cartItems.filter(item=>item.id !==itemId)
+  
+    setCartItems([...deleteItem]);
+    // setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
   };
   
 
