@@ -19,7 +19,11 @@ const ItemDetailContainer = () => {
         const productRef = doc(db, 'products', id);
         const docSnapshot = await getDoc(productRef);
         if (docSnapshot.exists()) {
-          const productData = docSnapshot.data();
+          // const productData = docSnapshot.data();
+          const productData = {
+            id: docSnapshot.id,
+            ...docSnapshot.data(),
+          };
           setProduct(productData);
           setStockAvailable(productData.stock);
         } else {
@@ -32,11 +36,12 @@ const ItemDetailContainer = () => {
         setLoading(false);
       }
     };
+   
 
     getProductById();
   }, [id]);
 
- 
+
 
   if (loading) {
     return <p>Cargando...</p>;
@@ -49,7 +54,7 @@ const ItemDetailContainer = () => {
   return (
     <div>
       {product ? (
-        <ItemDetail product={product} stockAvailable={stockAvailable}/>
+        <ItemDetail product={product} stockAvailable={stockAvailable} />
       ) : (
         <p>Producto no encontrado.</p>
       )}
