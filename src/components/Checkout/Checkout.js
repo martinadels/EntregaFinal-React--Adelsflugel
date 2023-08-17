@@ -49,6 +49,7 @@ const Checkout = () => {
       {orderId ? (
         <div>
           <p>Order ID: {orderId}</p>
+          <p>Gracias por tu compra</p>
           <Link to="/" onClick={clearCart}>
             Volver a los productos
           </Link>
